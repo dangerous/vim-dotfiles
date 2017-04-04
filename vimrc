@@ -161,7 +161,7 @@ set laststatus=2
 
 " Ctrl-P plugin
 let g:ctrlp_working_path_mode = 'ra'
-let g:ctrlp_custom_ignore = '\v[\/](\.git|tmp)$'
+let g:ctrlp_custom_ignore = '\v[\/](\.git|tmp|node_modules)$'
 let g:ctrlp_max_files=100000
 
 " Airline plugin
