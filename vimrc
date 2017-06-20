@@ -175,3 +175,5 @@ let g:NERDSpaceDelims = 1
 let g:NERDCommentEmptyLines = 1
 nmap <silent> <leader>, <Plug>NERDCommenterToggle
 vmap <silent> <leader>, <Plug>NERDCommenterToggle
+
+runtime macros/matchit.vim
