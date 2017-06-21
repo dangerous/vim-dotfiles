@@ -6,10 +6,6 @@
 " this must be first, because it changes other options as a side effect
 set nocompatible
 
-runtime bundle/vim-pathogen/autoload/pathogen.vim
-call pathogen#infect()
-call pathogen#helptags()
-
 " GENERAL SETUP
 set nobackup
 set formatoptions+=l
