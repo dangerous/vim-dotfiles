@@ -34,3 +34,9 @@
 [submodule "pack/plugins/start/vim-vue"]
 	path = pack/plugins/start/vim-vue
 	url = git@github.com:posva/vim-vue.git
+[submodule "pack/plugins/start/vim-json"]
+	path = pack/plugins/start/vim-json
+	url = git@github.com:elzr/vim-json.git
+[submodule "pack/plugins/start/vim-jsx"]
+	path = pack/plugins/start/vim-jsx
+	url = git@github.com:mxw/vim-jsx.git
