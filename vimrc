@@ -141,10 +141,9 @@ endif
 let g:NERDTreeQuitOnOpen = 1
 
 syntax enable
-set t_Co=16
-let g:solarized_termcolors=16
+set t_Co=256
 set background=dark
-colorscheme solarized
+colorscheme cobalt2
 let &t_ZH="\e[3m"
 let &t_ZR="\e[23m"
 highlight Comment cterm=italic
@@ -162,7 +161,7 @@ let g:ctrlp_max_files=100000
 
 " Airline plugin
 let g:airline_powerline_fonts = 1
-let g:airline_theme='solarized'
+let g:airline_theme='cobalt2'
 let g:airline_skip_empty_sections = 1
 
 " NERDCommenter
