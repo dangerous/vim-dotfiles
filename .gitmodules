@@ -13,9 +13,6 @@
 [submodule "pack/plugins/start/vim-javascript"]
 	path = pack/plugins/start/vim-javascript
 	url = git@github.com:pangloss/vim-javascript.git
-[submodule "pack/plugins/start/syntastic"]
-	path = pack/plugins/start/syntastic
-	url = git@github.com:vim-syntastic/syntastic.git
 [submodule "pack/plugins/start/vim-airline"]
 	path = pack/plugins/start/vim-airline
 	url = git@github.com:vim-airline/vim-airline.git
@@ -40,3 +37,6 @@
 [submodule "pack/plugins/start/vim-jsx"]
 	path = pack/plugins/start/vim-jsx
 	url = git@github.com:mxw/vim-jsx.git
+[submodule "pack/plugins/start/ale"]
+	path = pack/plugins/start/ale
+	url = git@github.com:w0rp/ale.git

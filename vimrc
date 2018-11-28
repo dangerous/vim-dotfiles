@@ -164,6 +164,10 @@ let g:airline_powerline_fonts = 1
 let g:airline_theme='cobalt2'
 let g:airline_skip_empty_sections = 1
 
+" ALE
+let g:ale_fix_on_save = 1
+let g:ale_javascript_eslint_use_global = 1
+
 " NERDCommenter
 let g:NERDSpaceDelims = 1
 let g:NERDCommentEmptyLines = 1
