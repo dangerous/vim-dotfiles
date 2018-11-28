@@ -147,7 +147,7 @@ colorscheme cobalt2
 let &t_ZH="\e[3m"
 let &t_ZR="\e[23m"
 highlight Comment cterm=italic
-highlight Type cterm=italic
+"highlight Type cterm=italic
 "highlight PreProc cterm=italic
 
 " Supertab completion should use omni-completion
