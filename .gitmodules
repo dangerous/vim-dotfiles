@@ -40,3 +40,6 @@
 [submodule "pack/plugins/start/ale"]
 	path = pack/plugins/start/ale
 	url = git@github.com:w0rp/ale.git
+[submodule "pack/plugins/start/vim-closetag"]
+	path = pack/plugins/start/vim-closetag
+	url = git@github.com:alvan/vim-closetag.git
