@@ -373,12 +373,12 @@ call s:X("ColorColumn","",g:black,"","","Black")
 
 call s:X("Title",g:dirty_green,"","bold","Green","")
 
-call s:X("Search",g:black,g:light_yellow,"underline","Magenta","")
+call s:X("Search",g:black,g:dark_orange,"underline","Magenta","")
 
 " Spell Checking
 
-call s:X("SpellBad",g:dark_red,"","underline","","DarkRed")
-call s:X("SpellCap","",g:darkest_blue,"underline","","Blue")
+call s:X("SpellBad",g:white,g:dark_red,"boldunderline","","DarkRed")
+call s:X("SpellCap","",g:darkest_green,"underline","","Blue")
 call s:X("SpellRare","",g:aubergine,"underline","","DarkMagenta")
 call s:X("SpellLocal","",g:darkest_green,"underline","","Green")
 
