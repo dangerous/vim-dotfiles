@@ -163,10 +163,14 @@ let g:ctrlp_max_files=100000
 let g:airline_powerline_fonts = 1
 let g:airline_theme='cobalt2'
 let g:airline_skip_empty_sections = 1
+let g:airline#extensions#ale#enabled = 1
 
 " ALE
-let g:ale_fix_on_save = 1
+let g:ale_fixers = {'javascript': ['prettier', 'eslint'], 'ruby': ['rubocop']}
+let g:ale_fix_on_save = 0
 let g:ale_javascript_eslint_use_global = 1
+let g:ale_sign_error = '●' " Less aggressive than the default '>>'
+let g:ale_sign_warning = '.'
 
 " NERDCommenter
 let g:NERDSpaceDelims = 1
