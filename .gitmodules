@@ -43,3 +43,9 @@
 [submodule "pack/plugins/start/vim-closetag"]
 	path = pack/plugins/start/vim-closetag
 	url = git@github.com:alvan/vim-closetag.git
+[submodule "pack/plugins/start/vim-elixir"]
+	path = pack/plugins/start/vim-elixir
+	url = git@github.com:elixir-editors/vim-elixir.git
+[submodule "pack/plugins/start/vim-toml"]
+	path = pack/plugins/start/vim-toml
+	url = git@github.com:cespare/vim-toml.git
