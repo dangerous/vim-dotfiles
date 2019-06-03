@@ -164,6 +164,16 @@ let g:airline_powerline_fonts = 1
 let g:airline_theme='cobalt2'
 let g:airline_skip_empty_sections = 1
 let g:airline#extensions#ale#enabled = 1
+let g:airline_theme_patch_func = 'AirlineThemePatch'
+
+" Color of inactive statusbar text
+function! AirlineThemePatch(palette)
+  if g:airline_theme == 'cobalt2'
+    for colors in values(a:palette.inactive)
+      let colors[2] = 220
+    endfor
+  endif
+endfunction
 
 " ALE
 let g:ale_fixers = {'javascript': ['prettier', 'eslint'], 'ruby': ['rubocop']}
@@ -198,6 +208,5 @@ let g:closetag_emptyTags_caseSensitive = 1
 let g:closetag_shortcut = '>'
 " Add > at current position without closing the current tag, default is ''
 let g:closetag_close_shortcut = '<leader>>'
-
 
 runtime macros/matchit.vim
