@@ -49,3 +49,9 @@
 [submodule "pack/plugins/start/vim-toml"]
 	path = pack/plugins/start/vim-toml
 	url = git@github.com:cespare/vim-toml.git
+[submodule "pack/plugins/start/vim-textobj-rubyblock"]
+	path = pack/plugins/start/vim-textobj-rubyblock
+	url = git@github.com:nelstrom/vim-textobj-rubyblock.git
+[submodule "pack/plugins/start/vim-textobj-user"]
+	path = pack/plugins/start/vim-textobj-user
+	url = git@github.com:kana/vim-textobj-user.git
