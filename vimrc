@@ -10,6 +10,7 @@ set nocompatible
 set nobackup
 set formatoptions+=l
 set history=50
+set laststatus=2
 set number
 set nopaste
 set pastetoggle=<F2>
@@ -150,10 +151,6 @@ let &t_ZR="\e[23m"
 highlight Comment cterm=italic
 "highlight Type cterm=italic
 "highlight PreProc cterm=italic
-
-" Supertab completion should use omni-completion
-let g:supertabdefaultcompletiontype = "context"
-set laststatus=2
 
 " Ctrl-P plugin
 let g:ctrlp_working_path_mode = 'ra'
