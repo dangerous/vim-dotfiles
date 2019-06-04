@@ -121,6 +121,10 @@ nmap <C-j> <C-W>j
 nmap <C-k> <C-W>k
 nmap <C-l> <C-W>l
 
+" Move around buffers
+nmap ˙ :bprevious<CR>
+nmap ¬ :bnext<CR>
+
 if bufwinnr(1)
     map + :res +1<CR>
     map - :res -1<CR>
@@ -160,11 +164,13 @@ let g:ctrlp_custom_ignore = '\v[\/](\.git|tmp|node_modules)$'
 let g:ctrlp_max_files=100000
 
 " Airline plugin
+let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
 let g:airline_theme='cobalt2'
 let g:airline_skip_empty_sections = 1
 let g:airline#extensions#ale#enabled = 1
 let g:airline_theme_patch_func = 'AirlineThemePatch'
+let g:airline#extensions#tabline#buffer_nr_show = 1
 
 " Color of inactive statusbar text
 function! AirlineThemePatch(palette)
