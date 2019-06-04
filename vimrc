@@ -204,4 +204,7 @@ let g:closetag_emptyTags_caseSensitive = 1
 let g:closetag_shortcut = '>'
 let g:closetag_close_shortcut = '<leader>>'
 
+" vim-json
+let g:vim_json_syntax_conceal = 0
+
 runtime macros/matchit.vim
