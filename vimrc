@@ -35,6 +35,10 @@ set splitright
 noremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')
 noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
 
+" COMPLETION
+imap <Tab> <c-p>
+set completeopt=longest,menuone
+
 " SEARCH
 set hlsearch
 set ignorecase
