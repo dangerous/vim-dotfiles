@@ -184,9 +184,13 @@ endfunction
 " ALE
 let g:ale_fixers = {'javascript': ['prettier', 'eslint'], 'ruby': ['rubocop']}
 let g:ale_fix_on_save = 0
+let g:ale_set_highlights = 0
 let g:ale_javascript_eslint_use_global = 1
-let g:ale_sign_error = '●' " Less aggressive than the default '>>'
-let g:ale_sign_warning = '.'
+let g:ale_sign_error = '✖'
+let g:ale_sign_warning = '⚠'
+highlight clear SignColumn
+highlight ALEErrorSign ctermbg=NONE ctermfg=red
+highlight ALEWarningSign ctermbg=NONE ctermfg=yellow
 
 " NERDCommenter
 let g:NERDSpaceDelims = 1
