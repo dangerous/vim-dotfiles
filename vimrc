@@ -65,9 +65,6 @@ if has("autocmd")
     " Set tab to 2 spaces
     au FileType html,css,xml setlocal ts=2 sts=2 sw=2
 
-    " Maps Ctrl-l to a PHP syntax check
-    au FileType php noremap <C-L> :!/usr/bin/env php -l %<CR>
-
     " When editing a file, always jump to the last known cursor position.
     " Don't do it when the position is invalid or when inside an event handler
     " (happens when dropping a file on gvim).
