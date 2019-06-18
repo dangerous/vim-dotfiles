@@ -101,7 +101,7 @@ noremap L $
 let mapleader = ","
 
 nmap     <silent> <leader>d   :NERDTreeToggle<CR>
-nmap     <silent> <leader>l   :set list!<CR>
+"nmap     <silent> <leader>l   :set list!<CR>
 nmap     <silent> <leader>n   :set nu!<CR>
 nmap     <silent> <leader>p   :set paste!<CR>
 nmap              <leader>v   :e $MYVIMRC<CR> " easy .vimrc editing
@@ -207,5 +207,16 @@ let g:closetag_close_shortcut = '<leader>>'
 
 " vim-json
 let g:vim_json_syntax_conceal = 0
+
+" ack.vim
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
+
+" vim-rspec
+map <leader>t :call RunCurrentSpecFile()<CR>
+map <leader>s :call RunNearestSpec()<CR>
+map <leader>l :call RunLastSpec()<CR>
+map <leader>a :call RunAllSpecs()<CR>
 
 runtime macros/matchit.vim
