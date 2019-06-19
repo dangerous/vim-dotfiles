@@ -149,7 +149,7 @@ let g:NERDTreeQuitOnOpen = 1
 syntax enable
 set t_Co=256
 set background=dark
-colorscheme cobalt2
+colorscheme solarized
 let &t_ZH="\e[3m"
 let &t_ZR="\e[23m"
 highlight Comment cterm=italic
@@ -164,7 +164,7 @@ let g:ctrlp_max_files=100000
 " Airline plugin
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
-let g:airline_theme='cobalt2'
+let g:airline_theme='solarized'
 let g:airline_skip_empty_sections = 1
 let g:airline#extensions#ale#enabled = 1
 let g:airline_theme_patch_func = 'AirlineThemePatch'
@@ -172,7 +172,7 @@ let g:airline#extensions#tabline#buffer_nr_show = 1
 
 " Color of inactive statusbar text
 function! AirlineThemePatch(palette)
-  if g:airline_theme == 'cobalt2'
+  if g:airline_theme == 'solarized'
     for colors in values(a:palette.inactive)
       let colors[2] = 220
     endfor
