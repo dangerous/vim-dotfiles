@@ -71,6 +71,9 @@ colorscheme dracula
 
 highlight Comment cterm=italic gui=italic
 highlight Type cterm=NONE gui=NONE
+highlight Keyword cterm=NONE gui=NONE
+highlight DraculaPurpleItalic cterm=NONE gui=NONE
+
 set listchars=tab:▸\ ,eol:¬
 
 " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

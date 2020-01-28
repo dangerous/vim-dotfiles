@@ -149,7 +149,7 @@ let g:NERDTreeQuitOnOpen = 1
 syntax enable
 set t_Co=256
 set background=dark
-colorscheme solarized
+"colorscheme solarized
 let &t_ZH="\e[3m"
 let &t_ZR="\e[23m"
 highlight Comment cterm=italic
@@ -209,6 +209,7 @@ let g:closetag_close_shortcut = '<leader>>'
 let g:vim_json_syntax_conceal = 0
 
 " ack.vim
+let g:ack_autoclose = 1
 if executable('ag')
   let g:ackprg = 'ag --vimgrep'
 endif
