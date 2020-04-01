@@ -83,10 +83,13 @@ au BufWritePre * :%s/\s\+$//e " trim whitespace from end of lines
 
 set ignorecase
 set number
-set relativenumber
 set smartcase
 set splitbelow
 set splitright
+
+" move virtually up and down wrapped lines, but use physical lines when used with a count
+noremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')
+noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
 
 " ~~~~~ tabs
 set expandtab     " uses spaces instead of tabs
@@ -103,7 +106,7 @@ map Y y$
 
 let mapleader = ","
 nmap <silent> <leader>l :set list!<CR>
-nmap <silent> <leader>n :set relativenumber!<CR>
+nmap <silent> <leader>n :set number! \| :SignifyToggle<CR>
 nmap <silent> <leader>p :set paste!<CR>
 nmap <silent> <leader>v :e ~/.config/nvim/init.vim<CR>
 nmap <silent> <leader>w :set wrap!<CR>
