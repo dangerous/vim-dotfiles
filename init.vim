@@ -6,21 +6,21 @@
 call plug#begin('~/.vim/plugged')
 
 " Declare the list of plugins.
-Plug 'artanikin/vim-synthwave84'
-Plug 'ayu-theme/ayu-vim'
+"Plug 'artanikin/vim-synthwave84'
+"Plug 'ayu-theme/ayu-vim'
 Plug 'dracula/vim'
-Plug 'drewtempelmeyer/palenight.vim'
-Plug 'jacoborus/tender.vim'
-Plug 'kyoz/purify', { 'rtp': 'vim' }
-Plug 'lifepillar/vim-solarized8'
-Plug 'mhartington/oceanic-next'
-Plug 'morhetz/gruvbox'
-Plug 'NLKNguyen/papercolor-theme'
-Plug 'rakr/vim-one'
-Plug 'sheerun/vim-wombat-scheme'
-Plug 'sjl/badwolf'
-Plug 'sonph/onehalf', {'rtp': 'vim/'}
-Plug 'tomasr/molokai'
+"Plug 'drewtempelmeyer/palenight.vim'
+"Plug 'jacoborus/tender.vim'
+"Plug 'kyoz/purify', { 'rtp': 'vim' }
+"Plug 'lifepillar/vim-solarized8'
+"Plug 'mhartington/oceanic-next'
+"Plug 'morhetz/gruvbox'
+"Plug 'NLKNguyen/papercolor-theme'
+"Plug 'rakr/vim-one'
+"Plug 'sheerun/vim-wombat-scheme'
+"Plug 'sjl/badwolf'
+"Plug 'sonph/onehalf', {'rtp': 'vim/'}
+"Plug 'tomasr/molokai'
 
 " Plug 'airblade/vim-gitgutter'
 Plug 'alvan/vim-closetag'
