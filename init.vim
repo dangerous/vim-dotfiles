@@ -29,6 +29,7 @@ Plug 'HerringtonDarkholme/yats.vim'
 Plug 'jreybert/vimagit'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
+Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'MaxMEllon/vim-jsx-pretty'
 Plug 'mhinz/vim-signify'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -44,6 +45,7 @@ Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
 Plug 'vim-ruby/vim-ruby'
 Plug 'wellle/targets.vim'
+Plug 'Yggdroot/indentLine'
 " List ends here. Plugins become visible to Vim after this call.
 call plug#end()
 
@@ -182,6 +184,10 @@ nnoremap f :Files<CR>
 nnoremap T :Tags<CR>
 nnoremap t :BTags<CR>
 nnoremap S :Ag<CR>
+
+" ~~~~~ indentLine
+let g:indentLine_char = '│'
+" let g:indent_blankline_space_char = '│'
 
 " ~~~~~ NERDCommenter
 let g:NERDSpaceDelims = 1
