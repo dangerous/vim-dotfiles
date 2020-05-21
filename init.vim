@@ -183,7 +183,8 @@ nnoremap ; :Buffers<CR>
 nnoremap f :Files<CR>
 nnoremap T :Tags<CR>
 nnoremap t :BTags<CR>
-nnoremap S :Ag<CR>
+nnoremap F :Ag<CR>
+let g:fzf_tags_command = 'ctags -R --exclude=node_modules --exclude=db'
 
 " ~~~~~ indentLine
 let g:indentLine_char = '│'
