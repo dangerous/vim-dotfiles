@@ -26,7 +26,7 @@ Plug 'dracula/vim'
 Plug 'alvan/vim-closetag'
 Plug 'dense-analysis/ale'
 Plug 'HerringtonDarkholme/yats.vim'
-"Plug 'honza/vim-snippets'
+Plug 'honza/vim-snippets'
 "Plug 'jreybert/vimagit'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
@@ -37,10 +37,9 @@ Plug 'mhinz/vim-signify' " provides +, !, _n in gutter
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'pangloss/vim-javascript'
 Plug 'preservim/nerdcommenter'
-"Plug 'preservim/nerdtree'
+Plug 'preservim/nerdtree'
 Plug 'rhysd/git-messenger.vim'
 Plug 'shime/vim-livedown'
-Plug 'SirVer/ultisnips'
 Plug 'thoughtbot/vim-rspec'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-fugitive'
@@ -153,6 +152,7 @@ autocmd! BufWritePost $MYVIMRC call ReloadVimrc()
 " ~~~~~ plugin configuration ~~~~~
 " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 " ~~~~~ ALE
+"let g:ale_change_sign_column_color = 1
 let g:ale_linters = {'javascript': ['eslint'], 'ruby': ['rubocop']}
 let g:ale_fixers = {'javascript': ['prettier', 'eslint'], 'ruby': ['rubocop']}
 let g:ale_fix_on_save = 0
@@ -175,14 +175,13 @@ let g:closetag_close_shortcut = '<leader>>'
 
 " ~~~~~ Coc
 let g:coc_global_extensions = [
-      \ 'coc-explorer',
       \ 'coc-git',
       \ 'coc-json',
       \ 'coc-tag',
-      \ 'coc-ultisnips',
+      \ 'coc-snippets',
       \ 'coc-yank',
       \]
-" use <tab> for trigger completion and navigate to the next complete item
+
 function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~ '\s'
@@ -192,8 +191,19 @@ inoremap <silent><expr> <Tab>
       \ pumvisible() ? "\<C-n>" :
       \ <SID>check_back_space() ? "\<Tab>" :
       \ coc#refresh()
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
-nmap <silent> <leader>d :CocCommand explorer --toggle --quit-on-open<CR>
+" ~~~~~ coc-snippets
+let g:coc_snippet_next = '<Tab>'
+let g:coc_snippet_previous = '<S-Tab>'
+"" Use <C-j> for jump to next placeholder, it's default of coc.nvim
+"let g:coc_snippet_next = '<c-j>'
+"
+"" Use <C-k> for jump to previous placeholder, it's default of coc.nvim
+"let g:coc_snippet_prev = '<c-k>'
+
+" ~~~~~ coc-yank
+nnoremap <silent> <space>y  :<C-u>CocList -A --normal yank<cr>
 
 " ~~~~~ FZF
 nmap <C-p> :Buffers<CR>
@@ -205,7 +215,6 @@ nnoremap F :Ag<CR>
 nnoremap H :Helptags<CR>
 nnoremap L :Lines<CR>
 nnoremap <leader>c :Commits<CR>
-nnoremap <silent> <space>y  :<C-u>CocList -A --normal yank<cr>
 let g:fzf_tags_command = 'ctags -R --exclude=node_modules --exclude=db'
 
 " ~~~~~ git-messenger
@@ -228,10 +237,10 @@ vmap <silent> <leader>, <Plug>NERDCommenterToggle
 " nmap     <silent> <leader>d   :NERDTreeToggle<CR>
 
 " ~~~~~~ UltiSnips
-let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/ultisnips']
-let g:UltiSnipsExpandTrigger="<c-&>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+"let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/ultisnips']
+"let g:UltiSnipsExpandTrigger="<c-&>"
+"let g:UltiSnipsJumpForwardTrigger="<c-b>"
+"let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 " ~~~~~ vim-fugitive
 nnoremap <leader>b :Gblame<CR>
