@@ -24,8 +24,10 @@ Plug 'dracula/vim'
 
 " Plug 'airblade/vim-gitgutter'
 Plug 'alvan/vim-closetag'
+Plug 'AndrewRadev/splitjoin.vim'
+Plug 'cespare/vim-toml'
 Plug 'dense-analysis/ale'
-Plug 'HerringtonDarkholme/yats.vim'
+Plug 'HerringtonDarkholme/yats.vim' " typescript highlighting
 Plug 'honza/vim-snippets'
 "Plug 'jreybert/vimagit'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
@@ -39,6 +41,7 @@ Plug 'pangloss/vim-javascript'
 Plug 'preservim/nerdcommenter'
 Plug 'preservim/nerdtree'
 Plug 'rhysd/git-messenger.vim'
+Plug 'rstacruz/vim-closer'
 Plug 'shime/vim-livedown'
 Plug 'thoughtbot/vim-rspec'
 Plug 'tpope/vim-endwise'
@@ -47,6 +50,7 @@ Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
 Plug 'vim-ruby/vim-ruby'
+Plug 'vimwiki/vimwiki'
 Plug 'wellle/targets.vim'
 Plug 'Yggdroot/indentLine'
 " List ends here. Plugins become visible to Vim after this call.
@@ -88,6 +92,7 @@ set listchars=tab:▸\ ,trail:·,eol:¬
 " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 au BufWritePre * :%s/\s\+$//e " trim whitespace from end of lines
 
+set conceallevel=0 " something to do with json not sure the plugin
 set ignorecase
 set number
 set smartcase
@@ -179,7 +184,7 @@ let g:coc_global_extensions = [
       \ 'coc-json',
       \ 'coc-tag',
       \ 'coc-snippets',
-      \ 'coc-yank',
+      "\ 'coc-yank',
       \]
 
 function! s:check_back_space() abort
@@ -192,6 +197,7 @@ inoremap <silent><expr> <Tab>
       \ <SID>check_back_space() ? "\<Tab>" :
       \ coc#refresh()
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 
 " ~~~~~ coc-snippets
 let g:coc_snippet_next = '<Tab>'
@@ -203,7 +209,7 @@ let g:coc_snippet_previous = '<S-Tab>'
 "let g:coc_snippet_prev = '<c-k>'
 
 " ~~~~~ coc-yank
-nnoremap <silent> <space>y  :<C-u>CocList -A --normal yank<cr>
+"nnoremap <silent> <space>y  :<C-u>CocList -A --normal yank<cr>
 
 " ~~~~~ FZF
 nmap <C-p> :Buffers<CR>
@@ -233,8 +239,8 @@ nmap <silent> <leader>, <Plug>NERDCommenterToggle
 vmap <silent> <leader>, <Plug>NERDCommenterToggle
 
 " ~~~~~ NERDTree
-" let g:NERDTreeQuitOnOpen = 1
-" nmap     <silent> <leader>d   :NERDTreeToggle<CR>
+let g:NERDTreeQuitOnOpen = 1
+nmap     <silent> <leader>d   :NERDTreeToggle<CR>
 
 " ~~~~~~ UltiSnips
 "let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/ultisnips']
@@ -249,3 +255,7 @@ nnoremap <leader>b :Gblame<CR>
 map <Leader>t :call RunCurrentSpecFile()<CR>
 map <Leader>s :call RunNearestSpec()<CR>
 let g:rspec_command = "sp | te bundle exec rspec {spec}"
+
+" ~~~~~ vimwiki
+let g:vimwiki_list = [{'path': '~/pCloud Drive/vimwiki/',
+                      \ 'syntax': 'markdown', 'ext': '.md'}]
