@@ -6,53 +6,38 @@
 call plug#begin('~/.vim/plugged')
 
 " Declare the list of plugins.
-"Plug 'artanikin/vim-synthwave84'
-"Plug 'ayu-theme/ayu-vim'
-Plug 'dracula/vim'
-"Plug 'drewtempelmeyer/palenight.vim'
-"Plug 'jacoborus/tender.vim'
-"Plug 'kyoz/purify', { 'rtp': 'vim' }
-"Plug 'lifepillar/vim-solarized8'
-"Plug 'mhartington/oceanic-next'
-"Plug 'morhetz/gruvbox'
-"Plug 'NLKNguyen/papercolor-theme'
-"Plug 'rakr/vim-one'
-"Plug 'sheerun/vim-wombat-scheme'
-"Plug 'sjl/badwolf'
-"Plug 'sonph/onehalf', {'rtp': 'vim/'}
-"Plug 'tomasr/molokai'
 
-" Plug 'airblade/vim-gitgutter'
-Plug 'alvan/vim-closetag'
-Plug 'AndrewRadev/splitjoin.vim'
-Plug 'cespare/vim-toml'
-Plug 'dense-analysis/ale'
+" Plug 'airblade/vim-gitgutter' " shows git diff markers in the sign column and stages/previews/undoes hunks and partial hunks
+Plug 'alvan/vim-closetag' " Auto close (X)HTML tags
+Plug 'AndrewRadev/splitjoin.vim' " Switch between single-line and multiline forms of code
+Plug 'cespare/vim-toml' " Vim syntax for TOML
+Plug 'dense-analysis/ale' " Asynchronous Lint Engine
+Plug 'dracula/vim' " Dark theme for vim
 Plug 'HerringtonDarkholme/yats.vim' " typescript highlighting
-Plug 'honza/vim-snippets'
-"Plug 'jreybert/vimagit'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
-Plug 'junegunn/fzf.vim'
-"Plug 'lukas-reineke/indent-blankline.nvim'
-Plug '~/git/indent-blankline.nvim'
-Plug 'MaxMEllon/vim-jsx-pretty'
+Plug 'honza/vim-snippets' " snippets files for various programming languages.
+"Plug 'jreybert/vimagit' " perform main git operations in few key press
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' } " a general-purpose command-line fuzzy finder
+Plug 'junegunn/fzf.vim' " a bundle of fzf-based commands and mappings
+Plug 'MaxMEllon/vim-jsx-pretty' " The React syntax highlighting and indenting plugin for vim
 Plug 'mhinz/vim-signify' " provides +, !, _n in gutter
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'pangloss/vim-javascript'
-Plug 'preservim/nerdcommenter'
-Plug 'preservim/nerdtree'
-Plug 'rhysd/git-messenger.vim'
-Plug 'rstacruz/vim-closer'
-Plug 'shime/vim-livedown'
-Plug 'thoughtbot/vim-rspec'
-Plug 'tpope/vim-endwise'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-rhubarb'
-Plug 'tpope/vim-sensible'
-Plug 'tpope/vim-surround'
-Plug 'vim-ruby/vim-ruby'
-Plug 'vimwiki/vimwiki'
-Plug 'wellle/targets.vim'
-Plug 'Yggdroot/indentLine'
+Plug 'neoclide/coc.nvim', {'branch': 'release'} " Intellisense engine
+Plug 'pangloss/vim-javascript' " syntax highlighting and improved indentation
+Plug 'preservim/nerdcommenter' " intensely nerdy commenting powers
+Plug 'preservim/nerdtree' " file system explorer
+Plug 'rhysd/git-messenger.vim' " quickly reveal the hidden message from Git under the cursor
+Plug 'rstacruz/vim-closer' " Closes brackets
+Plug 'shime/vim-livedown' " Live markdown previews
+Plug 'thoughtbot/vim-rspec' " lightweight RSpec runner
+Plug 'tpope/vim-endwise' " wisely add `end` in ruby
+Plug 'tpope/vim-fugitive' " A Git wrapper so awesome, it should be illegal
+Plug 'tpope/vim-rhubarb' " GitHub extension for fugitive.vim
+Plug 'tpope/vim-sensible' " Defaults everyone can agree on
+Plug 'tpope/vim-surround' " all about surroundings; parentheses, brackets, quotes, XML tags, and more
+Plug 'vim-ruby/vim-ruby' " Vim/Ruby Configuration Files
+Plug 'vimwiki/vimwiki' " a personal wiki for Vim
+Plug 'wellle/targets.vim' " adds various text objects to give you more targets to operate on
+Plug 'Yggdroot/indentLine' " displays thin vertical lines at each indentation level for code indented with spaces
+
 " List ends here. Plugins become visible to Vim after this call.
 call plug#end()
 
@@ -62,23 +47,7 @@ call plug#end()
 set background=dark
 set termguicolors
 
-" let ayucolor="dark" " light|mirage|dark
-" colorscheme ayu
-" colorscheme badwolf
 colorscheme dracula
-" colorscheme goodwolf
-" colorscheme gruvbox
-" colorscheme molokai
-" colorscheme OceanicNext
-" colorscheme one
-" colorscheme onehalfdark
-" colorscheme palenight
-" colorscheme PaperColor
-" colorscheme purify
-" colorscheme solarized8_flat
-" colorscheme synthwave84
-" colorscheme tender
-" colorscheme wombat
 
 highlight Comment cterm=italic gui=italic
 highlight Type cterm=NONE gui=NONE
@@ -92,7 +61,7 @@ set listchars=tab:▸\ ,trail:·,eol:¬
 " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 au BufWritePre * :%s/\s\+$//e " trim whitespace from end of lines
 
-set conceallevel=0 " something to do with json not sure the plugin
+set conceallevel=2 " something to do with json not sure the plugin
 set ignorecase
 set number
 set smartcase
@@ -228,7 +197,6 @@ nmap <leader>m <Plug>(git-messenger)
 
 " ~~~~~ indentLine
 let g:indentLine_char = '│'
-" let g:indent_blankline_space_char = '│'
 " prevent theme from over-riding Conceal colours
 hi Conceal ctermfg=239 guifg=Grey30
 
@@ -241,12 +209,6 @@ vmap <silent> <leader>, <Plug>NERDCommenterToggle
 " ~~~~~ NERDTree
 let g:NERDTreeQuitOnOpen = 1
 nmap     <silent> <leader>d   :NERDTreeToggle<CR>
-
-" ~~~~~~ UltiSnips
-"let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/ultisnips']
-"let g:UltiSnipsExpandTrigger="<c-&>"
-"let g:UltiSnipsJumpForwardTrigger="<c-b>"
-"let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 " ~~~~~ vim-fugitive
 nnoremap <leader>b :Gblame<CR>
