@@ -7,26 +7,33 @@ call plug#begin('~/.vim/plugged')
 
 " Declare the list of plugins.
 
-" Plug 'airblade/vim-gitgutter' " shows git diff markers in the sign column and stages/previews/undoes hunks and partial hunks
+Plug 'aklt/plantuml-syntax' " PlantUML
 Plug 'alvan/vim-closetag' " Auto close (X)HTML tags
 Plug 'AndrewRadev/splitjoin.vim' " Switch between single-line and multiline forms of code
-Plug 'cespare/vim-toml' " Vim syntax for TOML
+Plug 'cespare/vim-toml', { 'branch': 'main' } " Vim syntax for TOML
+Plug 'crusoexia/vim-monokai' " Monokai color scheme
+Plug 'dag/vim-fish' " Vim syntax for fish config files
 Plug 'dense-analysis/ale' " Asynchronous Lint Engine
 Plug 'dracula/vim' " Dark theme for vim
 Plug 'HerringtonDarkholme/yats.vim' " typescript highlighting
-Plug 'honza/vim-snippets' " snippets files for various programming languages.
-"Plug 'jreybert/vimagit' " perform main git operations in few key press
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' } " a general-purpose command-line fuzzy finder
+" Plug 'itchyny/vim-gitbranch'
+" Plug 'itchyny/lightline.vim'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " a general-purpose command-line fuzzy finder
 Plug 'junegunn/fzf.vim' " a bundle of fzf-based commands and mappings
+Plug 'junegunn/gv.vim' " A git commit browser.
 Plug 'MaxMEllon/vim-jsx-pretty' " The React syntax highlighting and indenting plugin for vim
 Plug 'mhinz/vim-signify' " provides +, !, _n in gutter
+Plug 'morhetz/gruvbox'
+Plug 'mracos/mermaid.vim', {'branch': 'main'} " provides support to mermaid syntax files
 Plug 'neoclide/coc.nvim', {'branch': 'release'} " Intellisense engine
 Plug 'pangloss/vim-javascript' " syntax highlighting and improved indentation
 Plug 'preservim/nerdcommenter' " intensely nerdy commenting powers
 Plug 'preservim/nerdtree' " file system explorer
 Plug 'rhysd/git-messenger.vim' " quickly reveal the hidden message from Git under the cursor
 Plug 'rstacruz/vim-closer' " Closes brackets
-Plug 'shime/vim-livedown' " Live markdown previews
+Plug 'slim-template/vim-slim' " Slim syntax highlighting
+" Plug 'shime/vim-livedown' " Live markdown previews
+Plug 'stsewd/fzf-checkout.vim'
 Plug 'thoughtbot/vim-rspec' " lightweight RSpec runner
 Plug 'tpope/vim-endwise' " wisely add `end` in ruby
 Plug 'tpope/vim-fugitive' " A Git wrapper so awesome, it should be illegal
@@ -34,9 +41,10 @@ Plug 'tpope/vim-rhubarb' " GitHub extension for fugitive.vim
 Plug 'tpope/vim-sensible' " Defaults everyone can agree on
 Plug 'tpope/vim-surround' " all about surroundings; parentheses, brackets, quotes, XML tags, and more
 Plug 'vim-ruby/vim-ruby' " Vim/Ruby Configuration Files
+Plug 'vim-airline/vim-airline'
 Plug 'vimwiki/vimwiki' " a personal wiki for Vim
 Plug 'wellle/targets.vim' " adds various text objects to give you more targets to operate on
-Plug 'Yggdroot/indentLine' " displays thin vertical lines at each indentation level for code indented with spaces
+" Plug 'Yggdroot/indentLine' " displays thin vertical lines at each indentation level for code indented with spaces
 
 " List ends here. Plugins become visible to Vim after this call.
 call plug#end()
@@ -45,15 +53,19 @@ call plug#end()
 " ~~~~~ UI prefs ~~~~~
 " ~~~~~~~~~~~~~~~~~~~~
 set background=dark
+set linebreak
 set termguicolors
 
-colorscheme dracula
+" colorscheme dracula
+" colorscheme gruvbox
+colorscheme monokai
 
 highlight Comment cterm=italic gui=italic
 highlight Type cterm=NONE gui=NONE
 highlight Keyword cterm=NONE gui=NONE
 highlight DraculaPurpleItalic cterm=NONE gui=NONE
 
+set fillchars+=vert:\▏
 set listchars=tab:▸\ ,trail:·,eol:¬
 
 " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -63,6 +75,7 @@ au BufWritePre * :%s/\s\+$//e " trim whitespace from end of lines
 
 set conceallevel=2 " something to do with json not sure the plugin
 set ignorecase
+set mouse=
 set number
 set smartcase
 set splitbelow
@@ -112,7 +125,6 @@ endif
 " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 " ~~~~~ nvim convenience ~~~~~
 " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
 if !exists('*ReloadVimrc')
   fun! ReloadVimrc()
     let save_cursor = getcurpos()
@@ -125,9 +137,20 @@ autocmd! BufWritePost $MYVIMRC call ReloadVimrc()
 " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 " ~~~~~ plugin configuration ~~~~~
 " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+" ~~~~~ airline
+let g:airline_powerline_fonts = 1
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
+" let g:airline_symbols.branch = ''
+" let g:airline_symbols.readonly = ''
+" let g:airline_symbols.linenr = ''
+" let g:airline_symbols.notexists = '∄'
+
 " ~~~~~ ALE
 "let g:ale_change_sign_column_color = 1
-let g:ale_linters = {'javascript': ['eslint'], 'ruby': ['rubocop']}
+let g:ale_linters = {'javascript': ['eslint'], 'ruby': ['rubocop'], 'CloudFormation': ['cfn-lint']}
 let g:ale_fixers = {'javascript': ['prettier', 'eslint'], 'ruby': ['rubocop']}
 let g:ale_fix_on_save = 0
 let g:ale_set_highlights = 0
@@ -149,7 +172,7 @@ let g:closetag_close_shortcut = '<leader>>'
 
 " ~~~~~ Coc
 let g:coc_global_extensions = [
-      \ 'coc-git',
+      "\ 'coc-git',
       \ 'coc-json',
       \ 'coc-tag',
       \ 'coc-snippets',
@@ -191,9 +214,17 @@ nnoremap H :Helptags<CR>
 nnoremap L :Lines<CR>
 nnoremap <leader>c :Commits<CR>
 let g:fzf_tags_command = 'ctags -R --exclude=node_modules --exclude=db'
+hi! FZF guifg=#FF0000 guibg=NONE ctermbg=NONE ctermfg=NONE
+let g:fzf_layout = {'up':'~90%', 'window': { 'width': 0.8, 'height': 0.8,'yoffset':0.5,'xoffset': 0.5, 'border': 'sharp', 'highlight': 'FZF' } }
+" default command ag -p ~/.gitignore -g ""
+let $FZF_DEFAULT_COMMAND='ag --hidden -p ~/.gitignore -g ""'
+let $FZF_DEFAULT_OPTS='--reverse'
 
 " ~~~~~ git-messenger
 nmap <leader>m <Plug>(git-messenger)
+
+" ~~~~~ golden-ratio
+" nmap <silent> <leader>r :GoldenRatioToggle<CR>
 
 " ~~~~~ indentLine
 let g:indentLine_char = '│'
@@ -210,8 +241,23 @@ vmap <silent> <leader>, <Plug>NERDCommenterToggle
 let g:NERDTreeQuitOnOpen = 1
 nmap     <silent> <leader>d   :NERDTreeToggle<CR>
 
+" ~~~~~ plantuml-syntax
+autocmd FileType plantuml call FT_plantuml()
+function FT_plantuml()
+  nnoremap <F5> :w<CR> :silent make<CR>
+  inoremap <F5> <Esc>:w<CR>:silent make<CR>
+  vnoremap <F5> :<C-U>:w<CR>:silent make<CR
+endfunction
+
+" ~~~~~ python3 provider
+let g:python3_host_prog="/usr/local/bin/python3"
+
 " ~~~~~ vim-fugitive
-nnoremap <leader>b :Gblame<CR>
+nnoremap <leader>b :Git blame<CR>
+nnoremap <leader>gb :GBranches<CR>
+nmap <leader>gj :diffget //3<CR>
+nmap <leader>gf :diffget //2<CR>
+nmap <leader>gs :G<CR>
 
 " ~~~~~ vim-rspec
 map <Leader>t :call RunCurrentSpecFile()<CR>
