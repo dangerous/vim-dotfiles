@@ -4,38 +4,26 @@
 
 " Plugins will be downloaded under the specified directory.
 call plug#begin('~/.vim/plugged')
-
 " Declare the list of plugins.
-
 Plug 'aklt/plantuml-syntax' " PlantUML
 Plug 'alvan/vim-closetag' " Auto close (X)HTML tags
 Plug 'AndrewRadev/splitjoin.vim' " Switch between single-line and multiline forms of code [gS / gJ]
 Plug 'cespare/vim-toml', { 'branch': 'main' } " Vim syntax for TOML
 Plug 'crusoexia/vim-monokai' " Monokai color scheme
-" Plug 'dag/vim-fish' " Vim syntax for fish config files
 Plug 'dense-analysis/ale' " Asynchronous Lint Engine
-" Plug 'dracula/vim' " Dark theme for vim
 Plug 'HerringtonDarkholme/yats.vim' " typescript highlighting
-" Plug 'itchyny/vim-gitbranch'
-" Plug 'itchyny/lightline.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " a general-purpose command-line fuzzy finder
 Plug 'junegunn/fzf.vim' " a bundle of fzf-based commands and mappings
-" Plug 'junegunn/goyo.vim' " Distraction-free writing in Vim
-" Plug 'junegunn/gv.vim' " A git commit browser.
 Plug 'MaxMEllon/vim-jsx-pretty' " The React syntax highlighting and indenting plugin for vim
 Plug 'mhinz/vim-signify' " provides +, !, _n in gutter
-" Plug 'morhetz/gruvbox'
 Plug 'mracos/mermaid.vim', {'branch': 'main'} " provides support to mermaid syntax files
 Plug 'neoclide/coc.nvim', {'branch': 'release'} " Intellisense engine
-" Plug 'neovim/nvim-lspconfig'
 Plug 'pangloss/vim-javascript' " syntax highlighting and improved indentation
 Plug 'preservim/nerdcommenter' " intensely nerdy commenting powers
 Plug 'preservim/nerdtree' " file system explorer
 Plug 'rhysd/git-messenger.vim' " quickly reveal the hidden message from Git under the cursor [<leader>gm]
 Plug 'rstacruz/vim-closer' " Closes brackets
 Plug 'slim-template/vim-slim' " Slim syntax highlighting
-" Plug 'shime/vim-livedown' " Live markdown previews
-" Plug 'stsewd/fzf-checkout.vim'
 Plug 'thoughtbot/vim-rspec' " lightweight RSpec runner [<leader>t (/s/l/a)]
 Plug 'tpope/vim-endwise' " wisely add `end` in ruby
 Plug 'tpope/vim-fugitive' " A Git wrapper so awesome, it should be illegal
@@ -44,10 +32,7 @@ Plug 'tpope/vim-sensible' " Defaults everyone can agree on
 Plug 'tpope/vim-surround' " all about surroundings; parentheses, brackets, quotes, XML tags, and more
 Plug 'vim-ruby/vim-ruby' " Vim/Ruby Configuration Files
 Plug 'vim-airline/vim-airline'
-" Plug 'vimwiki/vimwiki' " a personal wiki for Vim
 Plug 'wellle/targets.vim' " adds various text objects to give you more targets to operate on
-" Plug 'Yggdroot/indentLine' " displays thin vertical lines at each indentation level for code indented with spaces
-
 " List ends here. Plugins become visible to Vim after this call.
 call plug#end()
 
@@ -58,10 +43,7 @@ set background=dark
 set linebreak
 set termguicolors
 
-" colorscheme dracula
-" colorscheme gruvbox
 colorscheme monokai
-" colorscheme monokai-pro
 
 highlight Comment cterm=italic gui=italic
 highlight Type cterm=NONE gui=NONE
@@ -142,10 +124,10 @@ autocmd! BufWritePost $MYVIMRC call ReloadVimrc()
 " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 " ~~~~~ airline
 let g:airline_powerline_fonts = 1
-let g:airline_left_sep = ''
-let g:airline_left_alt_sep = ''
-let g:airline_right_sep = ''
-let g:airline_right_alt_sep = ''
+" let g:airline_left_sep = ''
+" let g:airline_left_alt_sep = ''
+" let g:airline_right_sep = ''
+" let g:airline_right_alt_sep = ''
 " let g:airline_symbols.branch = ''
 " let g:airline_symbols.readonly = ''
 " let g:airline_symbols.linenr = ''
@@ -175,12 +157,7 @@ let g:closetag_close_shortcut = '<leader>>'
 
 " ~~~~~ Coc
 let g:coc_global_extensions = [
-      "\ 'coc-git',
       \ 'coc-json',
-      "\ 'coc-tag',
-      "\ 'coc-snippets',
-      "\ 'coc-solargraph',
-      "\ 'coc-yank',
       \]
 
 function! s:check_back_space() abort
@@ -195,45 +172,18 @@ inoremap <silent><expr> <Tab>
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 
-" ~~~~~ coc-snippets
-" let g:coc_snippet_next = '<Tab>'
-" let g:coc_snippet_previous = '<S-Tab>'
-" Use <C-j> for jump to next placeholder, it's default of coc.nvim
-" let g:coc_snippet_next = '<c-j>'
-"
-" " Use <C-k> for jump to previous placeholder, it's default of coc.nvim
-" let g:coc_snippet_prev = '<c-k>'
-
-" ~~~~~ coc-yank
-"nnoremap <silent> <space>y  :<C-u>CocList -A --normal yank<cr>
-
 " ~~~~~ FZF
 nmap <C-p> :Buffers<CR>
-" nnoremap ; :Buffers<CR>
 nnoremap f :Files<CR>
-" nnoremap T :Tags<CR>
-" nnoremap t :BTags<CR>
 nnoremap F :Ag<CR>
-" nnoremap H :Helptags<CR>
 nnoremap L :Lines<CR>
-" nnoremap <leader>c :Commits<CR>
-" let g:fzf_tags_command = 'ctags -R --exclude=node_modules --exclude=db -f .tags'
 hi! FZF guifg=#FF0000 guibg=NONE ctermbg=NONE ctermfg=NONE
 let g:fzf_layout = {'up':'~90%', 'window': { 'width': 0.8, 'height': 0.8,'yoffset':0.5,'xoffset': 0.5, 'border': 'sharp', 'highlight': 'FZF' } }
-" default command ag -p ~/.gitignore -g ""
 let $FZF_DEFAULT_COMMAND='ag --hidden -p ~/.gitignore -g ""'
 let $FZF_DEFAULT_OPTS='--reverse'
 
 " ~~~~~ git-messenger
-nmap <leader>. <Plug>(git-messenger)
-
-" ~~~~~ golden-ratio
-" nmap <silent> <leader>r :GoldenRatioToggle<CR>
-
-" ~~~~~ indentLine
-" let g:indentLine_char = '│'
-" prevent theme from over-riding Conceal colours
-" hi Conceal ctermfg=239 guifg=Grey30
+nmap <leader>m <Plug>(git-messenger)
 
 " ~~~~~ NERDCommenter
 let g:NERDSpaceDelims = 1
@@ -267,7 +217,3 @@ nmap <leader>gs :G<CR>
 map <Leader>t :call RunCurrentSpecFile()<CR>
 map <Leader>s :call RunNearestSpec()<CR>
 let g:rspec_command = "sp | te bundle exec rspec {spec}"
-
-" ~~~~~ vimwiki
-" let g:vimwiki_list = [{'path': '~/pCloud Drive/vimwiki/',
-                      " \ 'syntax': 'markdown', 'ext': '.md'}]
