@@ -5,34 +5,77 @@
 " Plugins will be downloaded under the specified directory.
 call plug#begin('~/.vim/plugged')
 " Declare the list of plugins.
+
+Plug 'tpope/vim-sensible' " Defaults everyone can agree on
+
+" ~~~ Language Support
 Plug 'aklt/plantuml-syntax' " PlantUML
 Plug 'alvan/vim-closetag' " Auto close (X)HTML tags
-Plug 'AndrewRadev/splitjoin.vim' " Switch between single-line and multiline forms of code [gS / gJ]
 Plug 'cespare/vim-toml', { 'branch': 'main' } " Vim syntax for TOML
-Plug 'crusoexia/vim-monokai' " Monokai color scheme
-Plug 'dense-analysis/ale' " Asynchronous Lint Engine
+Plug 'ekalinin/Dockerfile.vim' " Vim syntax file & snippets for Docker's Dockerfile
 Plug 'HerringtonDarkholme/yats.vim' " typescript highlighting
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " a general-purpose command-line fuzzy finder
-Plug 'junegunn/fzf.vim' " a bundle of fzf-based commands and mappings
+Plug 'instant-markdown/vim-instant-markdown', {'for': 'markdown', 'do': 'yarn install'} " Instant Markdown previews from Vim
+Plug 'keith/rspec.vim' " Better rspec syntax highlighting for Vim
 Plug 'MaxMEllon/vim-jsx-pretty' " The React syntax highlighting and indenting plugin for vim
-Plug 'mhinz/vim-signify' " provides +, !, _n in gutter
 Plug 'mracos/mermaid.vim', {'branch': 'main'} " provides support to mermaid syntax files
-Plug 'neoclide/coc.nvim', {'branch': 'release'} " Intellisense engine
 Plug 'pangloss/vim-javascript' " syntax highlighting and improved indentation
-Plug 'preservim/nerdcommenter' " intensely nerdy commenting powers
-Plug 'preservim/nerdtree' " file system explorer
-Plug 'rhysd/git-messenger.vim' " quickly reveal the hidden message from Git under the cursor [<leader>gm]
-Plug 'rstacruz/vim-closer' " Closes brackets
 Plug 'slim-template/vim-slim' " Slim syntax highlighting
 Plug 'thoughtbot/vim-rspec' " lightweight RSpec runner [<leader>t (/s/l/a)]
 Plug 'tpope/vim-endwise' " wisely add `end` in ruby
-Plug 'tpope/vim-fugitive' " A Git wrapper so awesome, it should be illegal
-Plug 'tpope/vim-rhubarb' " GitHub extension for fugitive.vim [adds :GBrowse]
-Plug 'tpope/vim-sensible' " Defaults everyone can agree on
 Plug 'tpope/vim-surround' " all about surroundings; parentheses, brackets, quotes, XML tags, and more
 Plug 'vim-ruby/vim-ruby' " Vim/Ruby Configuration Files
-Plug 'vim-airline/vim-airline'
+Plug 'vim-python/python-syntax' " Python syntax highlighting for Vim
+
+" ~~~ Code Linting
+
+" ~~~ Code Completion
+Plug 'neoclide/coc.nvim', {'branch': 'release'} " Intellisense engine
+
+" ~~~ Code Candy
+Plug 'rstacruz/vim-closer' " Closes brackets
+Plug 'tomtom/tcomment_vim' "  An extensible & universal comment vim-plugin that also handles embedded filetypes
+
+" ~~~ git cleverness
+Plug 'mhinz/vim-signify' " provides +, !, _n in gutter
+Plug 'rhysd/git-messenger.vim' " quickly reveal the hidden message from Git under the cursor [<leader>gm]
+Plug 'tpope/vim-fugitive' " A Git wrapper so awesome, it should be illegal
+Plug 'tpope/vim-rhubarb' " GitHub extension for fugitive.vim [adds :GBrowse]
+
+" ~~~ text objects
 Plug 'wellle/targets.vim' " adds various text objects to give you more targets to operate on
+
+" ~~~ Navigation
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " a general-purpose command-line fuzzy finder
+Plug 'junegunn/fzf.vim' " a bundle of fzf-based commands and mappings
+Plug 'preservim/nerdtree' " file system explorer
+
+" ~~~ Beautiful vim
+" Plug 'ap/vim-buftabline' " Forget Vim tabs – now you can have buffer tabs
+Plug 'vim-airline/vim-airline' " lean & mean status/tabline for vim that's light as air
+"
+" ~~~ Color schemes
+Plug 'sonph/onehalf', { 'rtp': 'vim' } " Clean, vibrant and pleasing color schemes for Vim, Sublime Text, iTerm, gnome-terminal and more.
+
+" DISABLED
+
+" ~~~ Language Support
+" ~~~ Code Linting
+" Plug 'dense-analysis/ale' " Asynchronous Lint Engine
+" ~~~ Code Completion
+" ~~~ Code Candy
+" Plug 'AndrewRadev/splitjoin.vim' " Switch between single-line and multiline forms of code [gS / gJ]
+" Plug 'preservim/nerdcommenter' " intensely nerdy commenting powers
+" Plug 'tpope/vim-commentary' " commentary.vim: comment stuff out
+" ~~~ git cleverness
+" ~~~ text objects
+" Plug 'kana/vim-textobj-user' " Vim plugin: Create your own text objects
+" Plug 'kana/vim-textobj-entire' " Vim plugin: Text objects for entire buffer
+" ~~~ Navigation
+" ~~~ Beautiful vim
+" ~~~ Color schemes
+Plug 'crusoexia/vim-monokai' " Monokai color scheme
+Plug 'dracula/vim' " The most famous dark theme ever created and available everywhere!
+Plug 'joshdick/onedark.vim' " A dark Vim/Neovim color scheme inspired by Atom's One Dark syntax theme.
 " List ends here. Plugins become visible to Vim after this call.
 call plug#end()
 
@@ -43,12 +86,13 @@ set background=dark
 set linebreak
 set termguicolors
 
-colorscheme monokai
+let g:airline_theme='dracula'
+let g:dracula_italic = 0
+colorscheme dracula
+highlight DraculaComment cterm=italic gui=italic
 
-highlight Comment cterm=italic gui=italic
-highlight Type cterm=NONE gui=NONE
-highlight Keyword cterm=NONE gui=NONE
-highlight DraculaPurpleItalic cterm=NONE gui=NONE
+" highlight Keyword cterm=NONE gui=NONE
+" highlight DraculaPurpleItalic cterm=NONE gui=NONE
 
 set fillchars+=vert:\▏
 set listchars=tab:▸\ ,trail:·,eol:¬
@@ -123,19 +167,16 @@ autocmd! BufWritePost $MYVIMRC call ReloadVimrc()
 " ~~~~~ plugin configuration ~~~~~
 " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 " ~~~~~ airline
+" :help airline-tabline
 let g:airline_powerline_fonts = 1
-" let g:airline_left_sep = ''
-" let g:airline_left_alt_sep = ''
-" let g:airline_right_sep = ''
-" let g:airline_right_alt_sep = ''
-" let g:airline_symbols.branch = ''
-" let g:airline_symbols.readonly = ''
-" let g:airline_symbols.linenr = ''
-" let g:airline_symbols.notexists = '∄'
+let g:airline#extension#tabline#enable=1
+let g:airline#extensions#tabline#show_buffers = 1
+let g:airline#extensions#tabline#show_tabs = 1
 
 " ~~~~~ ALE
-"let g:ale_change_sign_column_color = 1
-let g:ale_linters = {'javascript': ['eslint'], 'ruby': ['rubocop'], 'CloudFormation': ['cfn-lint']}
+let g:ale_change_sign_column_color = 0
+" let g:ale_linters = {'javascript': ['eslint'], 'ruby': ['rubocop'], 'CloudFormation': ['cfn-lint'], 'eruby': ['erblint']}
+let g:ale_linters = {'javascript': ['eslint'], 'ruby': ['rubocop'], 'CloudFormation': ['cfn-lint'], 'eruby': ['erblint']}
 let g:ale_fixers = {'javascript': ['prettier', 'eslint'], 'ruby': ['rubocop']}
 let g:ale_fix_on_save = 0
 let g:ale_set_highlights = 0
@@ -146,8 +187,13 @@ highlight clear SignColumn
 highlight ALEErrorSign ctermbg=NONE ctermfg=red
 highlight ALEWarningSign ctermbg=NONE ctermfg=yellow
 
+" move between buffers, this should go somewhere else
+set hidden
+nnoremap <C-N> :bnext<CR>
+nnoremap <C-P> :bprev<CR>
+
 " ~~~~~ Closetag
-let g:closetag_filenames = '*.html,*.xhtml,*.phtml'
+let g:closetag_filenames = "*.html.erb,*.html,*.xhtml,*.phtml"
 let g:closetag_xhtml_filenames = '*.xhtml,*.jsx,*.js'
 let g:closetag_filetypes = 'html,xhtml,phtml'
 let g:closetag_xhtml_filetypes = 'xhtml,jsx'
@@ -173,9 +219,12 @@ inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 
 " ~~~~~ FZF
-nmap <C-p> :Buffers<CR>
+" nmap <C-p> :Buffers<CR>
 nnoremap f :Files<CR>
 nnoremap F :Ag<CR>
+" nnoremap <C-f> :Files<CR>
+" nnoremap <C-a> :Ag<CR>
+" nnoremap <C-p> :FZF<CR>
 nnoremap L :Lines<CR>
 hi! FZF guifg=#FF0000 guibg=NONE ctermbg=NONE ctermfg=NONE
 let g:fzf_layout = {'up':'~90%', 'window': { 'width': 0.8, 'height': 0.8,'yoffset':0.5,'xoffset': 0.5, 'border': 'sharp', 'highlight': 'FZF' } }
@@ -186,10 +235,10 @@ let $FZF_DEFAULT_OPTS='--reverse'
 nmap <leader>m <Plug>(git-messenger)
 
 " ~~~~~ NERDCommenter
-let g:NERDSpaceDelims = 1
-let g:NERDCommentEmptyLines = 1
-nmap <silent> <leader>, <Plug>NERDCommenterToggle
-vmap <silent> <leader>, <Plug>NERDCommenterToggle
+" let g:NERDSpaceDelims = 1
+" let g:NERDCommentEmptyLines = 1
+" nmap <silent> <leader>, <Plug>NERDCommenterToggle
+" vmap <silent> <leader>, <Plug>NERDCommenterToggle
 
 " ~~~~~ NERDTree
 let g:NERDTreeQuitOnOpen = 1
@@ -205,6 +254,11 @@ endfunction
 
 " ~~~~~ python3 provider
 let g:python3_host_prog="/usr/local/bin/python3"
+
+" ~~~~~ tcomment
+nmap <leader>, :TComment<CR>
+vmap <leader>, :TComment<CR>
+" <c-_><c-_>   :: :TComment
 
 " ~~~~~ vim-fugitive
 nnoremap <leader>b :Git blame<CR>
