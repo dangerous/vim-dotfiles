@@ -29,7 +29,18 @@ Plug 'vim-python/python-syntax' " Python syntax highlighting for Vim
 " ~~~ Code Linting
 
 " ~~~ Code Completion
-Plug 'neoclide/coc.nvim', {'branch': 'release'} " Intellisense engine
+" Plug 'neoclide/coc.nvim', {'branch': 'release'} " Intellisense engine
+" let g:ruby_host_prog = '/Users/david/.asdf/shims/ruby'
+" Plug 'github/copilot.vim'
+Plug 'neovim/nvim-lspconfig'
+Plug 'hrsh7th/nvim-cmp'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'onsails/lspkind-nvim'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-cmdline'
+" Plug 'L3MON4D3/LuaSnip'
+" Plug 'saadparwaiz1/cmp_luasnip'
 
 " ~~~ Code Candy
 Plug 'rstacruz/vim-closer' " Closes brackets
@@ -54,7 +65,7 @@ Plug 'preservim/nerdtree' " file system explorer
 Plug 'vim-airline/vim-airline' " lean & mean status/tabline for vim that's light as air
 "
 " ~~~ Color schemes
-Plug 'sonph/onehalf', { 'rtp': 'vim' } " Clean, vibrant and pleasing color schemes for Vim, Sublime Text, iTerm, gnome-terminal and more.
+" Plug 'sonph/onehalf', { 'rtp': 'vim' } " Clean, vibrant and pleasing color schemes for Vim, Sublime Text, iTerm, gnome-terminal and more.
 
 " DISABLED
 
@@ -90,6 +101,7 @@ let g:airline_theme='dracula'
 let g:dracula_italic = 0
 colorscheme dracula
 highlight DraculaComment cterm=italic gui=italic
+highlight ErrorMsg guibg=#FFB86C guifg=#000000
 
 " highlight Keyword cterm=NONE gui=NONE
 " highlight DraculaPurpleItalic cterm=NONE gui=NONE
@@ -106,6 +118,7 @@ set conceallevel=2 " something to do with json not sure the plugin
 set ignorecase
 set mouse=
 set number
+" set relativenumber
 set smartcase
 set splitbelow
 set splitright
@@ -125,6 +138,13 @@ set smarttab      " backspace tabs where appropriate even though they are spaces
 set softtabstop=2 " allows us to backspace over 2 spaces at a time
 set tabstop=2     " specifies the width of a tab character
 
+" " highlight current line as a way to see what split I am in
+" augroup BgHighlight
+"   autocmd!
+"   autocmd WinEnter * set cul
+"   autocmd WinLeave * set nocul
+" augroup END
+
 " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 " ~~~~~ legacy muscle memory defaults ~~~~~
 " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -132,7 +152,7 @@ map Y y$
 
 let mapleader = ","
 nmap <silent> <leader>l :set list!<CR>
-nmap <silent> <leader>n :set number! \| :SignifyToggle \| :IndentLinesToggle<CR>
+nmap <silent> <leader>n :set number! \| :set relativenumber! \| :SignifyToggle \| :IndentLinesToggle<CR>
 nmap <silent> <leader>p :set paste!<CR>
 nmap <silent> <leader>v :e ~/.config/nvim/init.vim<CR>
 nmap <silent> <leader>w :set wrap!<CR>
@@ -144,11 +164,11 @@ nmap <C-k> <C-W>k
 nmap <C-l> <C-W>l
 
 if bufwinnr(1)
-    map + :res +1<CR>
-    map - :res -1<CR>
+  map + :res +1<CR>
+  map - :res -1<CR>
 
-    map <leader>+ :vertical:res +1<CR>
-    map <leader>- :vertical:res -1<CR>
+  map <leader>+ :vertical:res +1<CR>
+  map <leader>- :vertical:res -1<CR>
 endif
 
 " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -169,7 +189,7 @@ autocmd! BufWritePost $MYVIMRC call ReloadVimrc()
 " ~~~~~ airline
 " :help airline-tabline
 let g:airline_powerline_fonts = 1
-let g:airline#extension#tabline#enable=1
+let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#show_buffers = 1
 let g:airline#extensions#tabline#show_tabs = 1
 
@@ -189,8 +209,8 @@ highlight ALEWarningSign ctermbg=NONE ctermfg=yellow
 
 " move between buffers, this should go somewhere else
 set hidden
-nnoremap <C-N> :bnext<CR>
-nnoremap <C-P> :bprev<CR>
+nnoremap <silent> <C-N> :bnext<CR>
+nnoremap <silent> <C-P> :bprev<CR>
 
 " ~~~~~ Closetag
 let g:closetag_filenames = "*.html.erb,*.html,*.xhtml,*.phtml"
@@ -211,12 +231,12 @@ function! s:check_back_space() abort
   return !col || getline('.')[col - 1]  =~ '\s'
 endfunction
 
-inoremap <silent><expr> <Tab>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<Tab>" :
-      \ coc#refresh()
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
+" inoremap <silent><expr> <Tab>
+"       \ pumvisible() ? "\<C-n>" :
+"       \ <SID>check_back_space() ? "\<Tab>" :
+"       \ coc#refresh()
+" inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+" autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 
 " ~~~~~ FZF
 " nmap <C-p> :Buffers<CR>
@@ -242,7 +262,7 @@ nmap <leader>m <Plug>(git-messenger)
 
 " ~~~~~ NERDTree
 let g:NERDTreeQuitOnOpen = 1
-nmap     <silent> <leader>d   :NERDTreeToggle<CR>
+nmap <silent> <leader>d :NERDTreeToggle<CR>
 
 " ~~~~~ plantuml-syntax
 autocmd FileType plantuml call FT_plantuml()
@@ -271,3 +291,72 @@ nmap <leader>gs :G<CR>
 map <Leader>t :call RunCurrentSpecFile()<CR>
 map <Leader>s :call RunNearestSpec()<CR>
 let g:rspec_command = "sp | te bundle exec rspec {spec}"
+" ~~~~~ nvim lspconfig
+
+lua << EOF
+local nvim_lsp = require('lspconfig')
+local cmp = require'cmp'
+local lspkind = require('lspkind')
+
+-- Setup nvim-cmp.
+cmp.setup({
+snippet = {
+  expand = function(args)
+  require('luasnip').lsp_expand(args.body)
+  end,
+},
+mapping = {
+  ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+  ['<C-f>'] = cmp.mapping.scroll_docs(4),
+  ['<C-Space>'] = cmp.mapping.complete(),
+  ['<C-e>'] = cmp.mapping.close(),
+  ['<CR>'] = cmp.mapping.confirm({
+  behavior = cmp.ConfirmBehavior.Replace,
+  select = true,
+  }),
+  ['<Tab>'] = function(fallback)
+  if cmp.visible() then
+    cmp.select_next_item()
+  elseif vim.fn  == 1 then
+    feedkey("<Plug>(vsnip-expand-or-jump)", "")
+  elseif has_words_before() then
+    cmp.complete()
+  else
+    fallback()
+    end
+    end,
+    ['<S-Tab>'] = function(fallback)
+    if cmp.visible() then
+      cmp.select_prev_item()
+    elseif vim.fn["vsnip#jumpable"](-1) == 1 then
+      feedkey("<Plug>(vsnip-jump-prev)", "")
+    else
+      fallback()
+      end
+      end,
+},
+sources = {
+  { name = 'nvim_lsp' },
+  { name = 'buffer' },
+  { name = 'path' },
+  { name = 'luasnip' },
+},
+formatting = {
+  format = lspkind.cmp_format({
+  with_text = true,
+  menu = ({
+  buffer = "[Buffer]",
+  nvim_lsp = "[LSP]",
+  path = "[Path]",
+  luasnip = "[LuaSnip]",
+  }),
+  }),
+},
+})
+
+-- Setup lspconfig.
+nvim_lsp.solargraph.setup {
+  cmd = { "/Users/david/.asdf/shims/solargraph", "stdio" },
+  capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities()),
+}
+EOF
