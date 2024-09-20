@@ -100,7 +100,7 @@ set termguicolors
 let g:airline_theme='dracula'
 let g:dracula_italic = 0
 colorscheme dracula
-highlight DraculaComment cterm=italic gui=italic
+highlight DraculaComment cterm=italic gui=italic guifg=#cccccc
 highlight ErrorMsg guibg=#FFB86C guifg=#000000
 
 " highlight Keyword cterm=NONE gui=NONE
