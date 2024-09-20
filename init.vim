@@ -152,7 +152,8 @@ map Y y$
 
 let mapleader = ","
 nmap <silent> <leader>l :set list!<CR>
-nmap <silent> <leader>n :set number! \| :set relativenumber! \| :SignifyToggle \| :IndentLinesToggle<CR>
+" nmap <silent> <leader>n :set number! \| :set relativenumber! \| :SignifyToggle \| :IndentLinesToggle<CR>
+nmap <silent> <leader>n :set number! \| :SignifyToggle \| :IndentLinesToggle<CR>
 nmap <silent> <leader>p :set paste!<CR>
 nmap <silent> <leader>v :e ~/.config/nvim/init.vim<CR>
 nmap <silent> <leader>w :set wrap!<CR>
